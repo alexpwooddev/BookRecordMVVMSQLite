@@ -11,11 +11,13 @@ namespace BookRecordMVVMSQLite.ViewModel.Commands
     {
         public NewBookVM VM { get; set; }
 
+
         public event EventHandler CanExecuteChanged;
 
         public AddBookCommand(NewBookVM vm)
         {
             VM = vm;
+     
         }
 
 
@@ -28,6 +30,7 @@ namespace BookRecordMVVMSQLite.ViewModel.Commands
         public void Execute(object parameter)
         {
             VM.AddBook();
+     
         }
     }
 }

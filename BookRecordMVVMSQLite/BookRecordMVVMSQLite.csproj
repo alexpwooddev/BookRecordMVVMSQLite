@@ -101,6 +101,9 @@
     <Compile Include="View\NewBookWindow.xaml.cs">
       <DependentUpon>NewBookWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\BookControl.xaml.cs">
+      <DependentUpon>BookControl.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Book.cs" />
@@ -137,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\NewBookWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\BookControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

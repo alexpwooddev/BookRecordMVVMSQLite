@@ -15,14 +15,76 @@ namespace BookRecordMVVMSQLite.ViewModel
     public class NewBookVM : INotifyPropertyChanged
     {
 
-        NewBookWindow newBookWindow = new NewBookWindow();
+        private string inputTitle;
+
+        public string InputTitle
+        {
+            get { return inputTitle; }
+            set 
+            { 
+                inputTitle = value;
+                OnPropertyChanged("InputTitle");
+            }
+        }
+
+        private string inputAuthor;
+
+        public string InputAuthor
+        {
+            get { return inputAuthor; }
+            set 
+            {
+                inputAuthor = value;
+                OnPropertyChanged("InputAuthor");
+            }
+        }
+
+        private string inputGenre;
+
+        public string InputGenre
+        {
+            get { return inputGenre; }
+            set 
+            { 
+                inputGenre = value;
+                OnPropertyChanged("InputGenre");
+            }
+        }
+
+        private string inputYearRead;
+
+        public string InputYearRead
+        {
+            get { return inputYearRead; }
+            set 
+            { 
+                inputYearRead = value;
+                OnPropertyChanged("InputYearRead");
+            }
+        }
+
+
+
+
+
 
 
 
         public AddBookCommand AddBookCommand { get; set; }
 
-
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public EventHandler BookAdded; 
+
+
+        public NewBookVM()
+        {
+            AddBookCommand = new AddBookCommand(this);
+
+        }
+
+
+
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -33,22 +95,26 @@ namespace BookRecordMVVMSQLite.ViewModel
         {
             //take input from the 4 fields
             //assign those values to an instance of a book
+         
             Book book = new Book()
             {
-                Title = newBookWindow.titleTextBox2.Text,
-                Author = newBookWindow.authorTextBox2.Text,
-                Genre = newBookWindow.genreTextBox2.Text,
-                YearRead = newBookWindow.yearReadTextBox2.Text
+                Title = InputTitle,
+                Author = InputAuthor,
+                Genre = InputGenre,
+                YearRead = InputYearRead
             };
 
             //Update the database Table with this book
             DatabaseHelper.Insert(book);
 
-            //TODO: close this window
+            InputTitle = string.Empty;
+            InputAuthor = string.Empty;
+            InputGenre = string.Empty;
+            InputYearRead = string.Empty;
 
-
-            
-            //Maybe an event handler that fires now - then main window can subscribe to that and refresh?
+            //TODO: close this window            
+            //TODO: Maybe an event handler that fires now - then main window can subscribe to that and refresh?
+                  
         }
     }
 }

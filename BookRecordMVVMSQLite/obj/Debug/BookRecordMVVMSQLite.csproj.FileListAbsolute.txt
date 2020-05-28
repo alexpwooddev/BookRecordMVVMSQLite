@@ -36,3 +36,5 @@ C:\Users\Alexander Wood\source\repos\BookRecordMVVMSQLite\BookRecordMVVMSQLite\o
 C:\Users\Alexander Wood\source\repos\BookRecordMVVMSQLite\BookRecordMVVMSQLite\obj\Debug\BookRecordMVVMSQLite.exe
 C:\Users\Alexander Wood\source\repos\BookRecordMVVMSQLite\BookRecordMVVMSQLite\obj\Debug\BookRecordMVVMSQLite.pdb
 C:\Users\Alexander Wood\source\repos\BookRecordMVVMSQLite\BookRecordMVVMSQLite\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Alexander Wood\source\repos\BookRecordMVVMSQLite\BookRecordMVVMSQLite\obj\Debug\View\UserControls\BookControl.g.cs
+C:\Users\Alexander Wood\source\repos\BookRecordMVVMSQLite\BookRecordMVVMSQLite\obj\Debug\View\UserControls\BookControl.baml

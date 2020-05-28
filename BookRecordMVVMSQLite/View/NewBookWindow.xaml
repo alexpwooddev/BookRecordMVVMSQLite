@@ -25,15 +25,15 @@
             <Label Content="Year Read:" Style="{StaticResource labelStyle}" Margin="0.6" />
         </StackPanel>
         <StackPanel Grid.Column="1">
-            <TextBox x:Name="titleTextBox2" Margin="5" />
-            <TextBox x:Name="authorTextBox2" Margin="5" />
-            <TextBox x:Name="genreTextBox2" Margin="5" />
-            <TextBox x:Name="yearReadTextBox2" Margin="5" />
+            <TextBox x:Name="titleTextBox2" Text="{Binding InputTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Margin="5" />
+            <TextBox x:Name="authorTextBox2" Text="{Binding InputAuthor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+            <TextBox x:Name="genreTextBox2" Text="{Binding InputGenre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+            <TextBox x:Name="yearReadTextBox2" Text="{Binding InputYearRead, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
         </StackPanel>
         <Button Grid.Column="2" 
                 Style="{StaticResource positiveButtonsStyle}" 
                 Content="Add Book" 
                 x:Name="addDetailsButton"
-                Command="{Binding AddBookCommand}"/>
+                Command="{Binding AddBookCommand}" />
     </Grid>
 </Window>

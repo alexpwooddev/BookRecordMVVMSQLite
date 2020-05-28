@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Alexander Wood\source\repos\BookRecordMVVMSQLite\BookRecordMVVMSQLite\App.xaml
-21679396613
+3-1199469062
 3109926914
-13-1451244987
+14195412411
 127-1594236619
-View\BookRecordWindow.xaml;View\NewBookWindow.xaml;
+View\BookRecordWindow.xaml;View\NewBookWindow.xaml;View\UserControls\BookControl.xaml;
 
 False
 

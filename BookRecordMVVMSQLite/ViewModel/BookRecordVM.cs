@@ -1,6 +1,7 @@
 ﻿using BookRecordMVVMSQLite.Model;
 using BookRecordMVVMSQLite.View;
 using BookRecordMVVMSQLite.ViewModel.Commands;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -45,9 +46,26 @@ namespace BookRecordMVVMSQLite.ViewModel
             Books = new ObservableCollection<Book>();
             OpenAddWindowCommand = new OpenAddWindowCommand(this);
             RemoveCommand = new RemoveCommand(this);
+
+            ReadBooks();
         }
 
 
+
+        public void ReadBooks()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(DatabaseHelper.dbFile))
+            {
+                var books = conn.Table<Book>().ToList();
+
+                Books.Clear();
+
+                foreach (var book in books)
+                {
+                    Books.Add(book);
+                }
+            }
+        }
 
 
         public void RemoveBook(Book book)
@@ -56,6 +74,8 @@ namespace BookRecordMVVMSQLite.ViewModel
             {
                 DatabaseHelper.Delete(book);
             }
+
+            ReadBooks();
         }
 
 
