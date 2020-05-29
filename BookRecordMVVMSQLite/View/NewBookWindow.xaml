@@ -12,6 +12,7 @@
     </Window.Resources>
     
     <Grid Background="#289cbd"
+          x:Name="BookWindowGrid"
           DataContext="{StaticResource vm}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.4*" />
@@ -34,6 +35,7 @@
                 Style="{StaticResource positiveButtonsStyle}" 
                 Content="Add Book" 
                 x:Name="addDetailsButton"
-                Command="{Binding AddBookCommand}" />
+                Command="{Binding AddBookCommand}"
+                />
     </Grid>
 </Window>

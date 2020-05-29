@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookRecordMVVMSQLite.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,15 @@ namespace BookRecordMVVMSQLite.View
         public NewBookWindow()
         {
             InitializeComponent();
+
+            NewBookVM vm = new NewBookVM();
+            BookWindowGrid.DataContext = vm;
+            vm.HasAddedBook += Vm_HasAddedBook;
+        }
+
+        private void Vm_HasAddedBook(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

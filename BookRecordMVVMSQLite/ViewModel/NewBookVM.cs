@@ -14,6 +14,8 @@ namespace BookRecordMVVMSQLite.ViewModel
 {
     public class NewBookVM : INotifyPropertyChanged
     {
+        
+
 
         private string inputTitle;
 
@@ -74,7 +76,7 @@ namespace BookRecordMVVMSQLite.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public EventHandler BookAdded; 
+        public event EventHandler HasAddedBook; 
 
 
         public NewBookVM()
@@ -93,16 +95,20 @@ namespace BookRecordMVVMSQLite.ViewModel
 
         public void AddBook()
         {
+         
             //take input from the 4 fields
             //assign those values to an instance of a book
-         
+           
+            
             Book book = new Book()
             {
+                
                 Title = InputTitle,
                 Author = InputAuthor,
                 Genre = InputGenre,
                 YearRead = InputYearRead
             };
+            
 
             //Update the database Table with this book
             DatabaseHelper.Insert(book);
@@ -114,7 +120,10 @@ namespace BookRecordMVVMSQLite.ViewModel
 
             //TODO: close this window            
             //TODO: Maybe an event handler that fires now - then main window can subscribe to that and refresh?
-                  
+            if (HasAddedBook != null)
+            {
+                HasAddedBook(this, new EventArgs());
+            }
         }
     }
 }

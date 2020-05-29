@@ -82,6 +82,10 @@ namespace BookRecordMVVMSQLite.ViewModel
         public void OpenNewBookWindow()
         {
             NewBookWindow newBookWindow = new NewBookWindow();
+            newBookWindow.Closed += (s, eventarg) =>
+            {
+                ReadBooks();
+            };
             newBookWindow.ShowDialog();
         }
 
