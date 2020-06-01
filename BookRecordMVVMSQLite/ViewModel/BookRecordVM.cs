@@ -16,6 +16,21 @@ namespace BookRecordMVVMSQLite.ViewModel
     public class BookRecordVM : INotifyPropertyChanged
     {
 
+        private bool isEditingComment;
+
+        public bool IsEditingComment
+        {
+            get { return isEditingComment; }
+            set 
+            {
+                isEditingComment = value;
+                OnPropertyChanged("IsEditingComment");
+            }
+        }
+
+        
+
+
         private string searchQuery;
 
         public string SearchQuery
@@ -58,19 +73,29 @@ namespace BookRecordMVVMSQLite.ViewModel
 
         public ObservableCollection<Book> Books { get; set; }
 
+        public ObservableCollection<Comment> Comments { get; set; }
+
         public OpenAddWindowCommand OpenAddWindowCommand { get; set; }
 
         public RemoveCommand RemoveCommand { get; set; }
+
+        public HasEditedCommentCommand HasEditedCommentCommand { get; set; }
 
 
 
         public BookRecordVM()
         {
+            IsEditingComment = true;
+            
             Books = new ObservableCollection<Book>();
+            Comments = new ObservableCollection<Comment>();
+
             OpenAddWindowCommand = new OpenAddWindowCommand(this);
             RemoveCommand = new RemoveCommand(this);
+            HasEditedCommentCommand = new HasEditedCommentCommand(this);
 
             ReadBooks();
+            ReadComments();
         }
 
 
@@ -131,6 +156,33 @@ namespace BookRecordMVVMSQLite.ViewModel
                 ReadBooks();
             };
             newBookWindow.ShowDialog();
+        }
+
+
+        public void ReadComments()
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(DatabaseHelper.dbFile))
+            {
+                conn.CreateTable<Comment>();
+
+                var comments = conn.Table<Comment>().ToList();
+
+                //clear everytime to avoid duplicates from previous calls
+                Comments.Clear();
+
+                foreach (var comment in comments)
+                {
+                    Comments.Add(comment);
+                }
+            }
+        }
+
+        public void HasCommented(Comment comment)
+        {
+            if (comment != null)
+            {
+                DatabaseHelper.Update(comment);
+            }
         }
 
 

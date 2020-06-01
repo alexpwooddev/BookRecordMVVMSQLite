@@ -117,8 +117,9 @@ namespace BookRecordMVVMSQLite.ViewModel
             };
             
 
-            //Update the database Table with this book
+            //Update the database Table with this book and comment
             DatabaseHelper.Insert(book);
+            DatabaseHelper.Insert(newComment);
 
             InputTitle = string.Empty;
             InputAuthor = string.Empty;

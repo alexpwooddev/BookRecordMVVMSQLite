@@ -95,10 +95,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Comment.cs" />
     <Compile Include="ViewModel\BookRecordVM.cs" />
     <Compile Include="ViewModel\Commands\AddBookCommand.cs" />
+    <Compile Include="ViewModel\Commands\HasEditedCommentCommand.cs" />
     <Compile Include="ViewModel\Commands\OpenAddWindowCommand.cs" />
     <Compile Include="ViewModel\Commands\RemoveCommand.cs" />
+    <Compile Include="ViewModel\Converters\BoolToVisConverter.cs" />
     <Compile Include="ViewModel\DatabaseHelper.cs" />
     <Compile Include="ViewModel\NewBookVM.cs" />
     <Compile Include="View\BookRecordWindow.xaml.cs">
@@ -109,6 +112,9 @@
     </Compile>
     <Compile Include="View\UserControls\BookControl.xaml.cs">
       <DependentUpon>BookControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\CommentControl.xaml.cs">
+      <DependentUpon>CommentControl.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\BookControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\CommentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

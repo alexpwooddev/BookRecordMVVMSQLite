@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookRecordMVVMSQLite.Model
 {
-    class Comment
+    public class Comment
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }

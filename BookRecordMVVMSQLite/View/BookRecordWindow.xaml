@@ -7,10 +7,12 @@
         xmlns:local="clr-namespace:BookRecordMVVMSQLite.View"
         xmlns:vm="clr-namespace:BookRecordMVVMSQLite.ViewModel"
         xmlns:uc="clr-namespace:BookRecordMVVMSQLite.View.UserControls"
+        xmlns:cv="clr-namespace:BookRecordMVVMSQLite.ViewModel.Converters"
         mc:Ignorable="d"
         Title="BookRecordWindow" Height="450" Width="800">
     <Window.Resources>
         <vm:BookRecordVM x:Key="vm" />
+        <cv:BoolToVisConverter x:Key="boolToVis" />
     </Window.Resources>
     
     <Grid DataContext="{StaticResource vm}">
@@ -34,12 +36,28 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <ListView Grid.Column="1">
-                    <DataTemplate>
-                        <TextBox Text="{Binding InputComment}">
+                <ListView Grid.Column="1"
+                          ItemsSource="{Binding Comments}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <uc:CommentControl DisplayComment="{Binding}" />
+                                <TextBox Text="{Binding CommentConent, Mode=TwoWay}"
+                                         
+                                         Visibility="{Binding Source={StaticResource vm}, Path=IsEditingComment, Converter={StaticResource boolToVis}}">
+                                    <b:Interaction.Triggers>
+                                        <b:EventTrigger EventName="LostFocus" >
+                                            <b:InvokeCommandAction Command="{Binding Source={StaticResource vm}, 
+                                                                    Path=HasEditedCommentCommand}"
+                                                                   CommandParameter="{Binding}" />
+                                        </b:EventTrigger>
+                                    </b:Interaction.Triggers>
 
-                        </TextBox>
-                    </DataTemplate>
+                                </TextBox>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    
                 </ListView>
             </Grid>
         </Grid>
