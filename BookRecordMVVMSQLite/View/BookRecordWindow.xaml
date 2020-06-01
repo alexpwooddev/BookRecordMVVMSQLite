@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:b="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:BookRecordMVVMSQLite.View"
         xmlns:vm="clr-namespace:BookRecordMVVMSQLite.ViewModel"
         xmlns:uc="clr-namespace:BookRecordMVVMSQLite.View.UserControls"
@@ -18,16 +19,29 @@
             <RowDefinition Height="1.1*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <ListView x:Name="booksListView"
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+                <ListView x:Name="booksListView"
                       Height="340"
                       SelectedItem="{Binding SelectedBook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding Books}">
-                <ListView.ItemTemplate>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <uc:BookControl DisplayBook="{Binding}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <ListView Grid.Column="1">
                     <DataTemplate>
-                        <uc:BookControl DisplayBook="{Binding}" />
+                        <TextBox Text="{Binding InputComment}">
+
+                        </TextBox>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </ListView>
+            </Grid>
         </Grid>
         <Grid Grid.Row="2" Background="#289cbd">
             <Grid.ColumnDefinitions>
@@ -52,8 +66,22 @@
                     <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
 
-                <Label Name="SearchLabel" Grid.Column="0" BorderBrush="DimGray" BorderThickness="1" Foreground="#f57f42" Background="AliceBlue" Margin="5" Content="Search:" HorizontalContentAlignment="Center" VerticalAlignment="Center"  />
-                <TextBox Padding="5" Grid.Column="1" Margin="0,0,5,0"  VerticalAlignment="Center" FontSize="12" />
+                <Label Name="SearchLabel" 
+                       Grid.Column="0" 
+                       BorderBrush="DimGray" 
+                       BorderThickness="1" 
+                       Foreground="#f57f42" 
+                       Background="AliceBlue" 
+                       Margin="5" 
+                       Content="Search:" 
+                       HorizontalContentAlignment="Center" VerticalAlignment="Center"  />
+                <TextBox       
+                    Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                    Padding="5" 
+                    Grid.Column="1" 
+                    Margin="0,0,5,0"  
+                    VerticalAlignment="Center" 
+                    FontSize="12" />
             </Grid>
 
         </Grid>

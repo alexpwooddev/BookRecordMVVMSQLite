@@ -98,6 +98,7 @@ namespace BookRecordMVVMSQLite.ViewModel
          
             //take input from the 4 fields
             //assign those values to an instance of a book
+            //AND create a blank comment 
            
             
             Book book = new Book()
@@ -107,6 +108,12 @@ namespace BookRecordMVVMSQLite.ViewModel
                 Author = InputAuthor,
                 Genre = InputGenre,
                 YearRead = InputYearRead
+            };
+
+            Comment newComment = new Comment()
+            {
+                BookId = book.Id,
+                CommentContent = ""
             };
             
 

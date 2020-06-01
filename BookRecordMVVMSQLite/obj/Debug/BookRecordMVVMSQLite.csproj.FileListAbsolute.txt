@@ -38,3 +38,7 @@ C:\Users\Alexander Wood\source\repos\BookRecordMVVMSQLite\BookRecordMVVMSQLite\o
 C:\Users\Alexander Wood\source\repos\BookRecordMVVMSQLite\BookRecordMVVMSQLite\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\Alexander Wood\source\repos\BookRecordMVVMSQLite\BookRecordMVVMSQLite\obj\Debug\View\UserControls\BookControl.g.cs
 C:\Users\Alexander Wood\source\repos\BookRecordMVVMSQLite\BookRecordMVVMSQLite\obj\Debug\View\UserControls\BookControl.baml
+C:\Users\Alexander Wood\source\repos\BookRecordMVVMSQLite\BookRecordMVVMSQLite\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\Alexander Wood\source\repos\BookRecordMVVMSQLite\BookRecordMVVMSQLite\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Alexander Wood\source\repos\BookRecordMVVMSQLite\BookRecordMVVMSQLite\bin\Debug\Microsoft.Expression.Interactions.xml
+C:\Users\Alexander Wood\source\repos\BookRecordMVVMSQLite\BookRecordMVVMSQLite\bin\Debug\System.Windows.Interactivity.xml
