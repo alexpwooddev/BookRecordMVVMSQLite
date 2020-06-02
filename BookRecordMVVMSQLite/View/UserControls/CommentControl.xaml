@@ -11,7 +11,7 @@
             <TextBlock x:Name="commentContentTextBlock"
                    Text="{Binding CommentContent}"
                    TextWrapping="Wrap"
-                    MaxWidth="200"
+                    MaxWidth="195"
                    TextAlignment="Left"/>
         </StackPanel>
         
