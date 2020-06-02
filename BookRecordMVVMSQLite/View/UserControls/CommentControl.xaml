@@ -7,7 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="200">
     <Grid>
-        <TextBlock x:Name="commentContentTextBlock"
-                   Text="{Binding CommentContent}"/>
+        <StackPanel Orientation="Vertical" >
+            <TextBlock x:Name="commentContentTextBlock"
+                   Text="{Binding CommentContent}"
+                   TextWrapping="Wrap"
+                    MaxWidth="200"
+                   TextAlignment="Left"/>
+        </StackPanel>
+        
     </Grid>
 </UserControl>

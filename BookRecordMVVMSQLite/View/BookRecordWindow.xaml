@@ -4,12 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:b="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:BookRecordMVVMSQLite.View"
         xmlns:vm="clr-namespace:BookRecordMVVMSQLite.ViewModel"
         xmlns:uc="clr-namespace:BookRecordMVVMSQLite.View.UserControls"
-        xmlns:cv="clr-namespace:BookRecordMVVMSQLite.ViewModel.Converters"
+        xmlns:cv="clr-namespace:BookRecordMVVMSQLite.ViewModel.Converters" 
+        xmlns:behaviours="clr-namespace:BookRecordMVVMSQLite.View.Behaviours"
         mc:Ignorable="d"
-        Title="BookRecordWindow" Height="450" Width="800">
+        Title="BookRecordWindow" Height="250" Width="800">
     <Window.Resources>
         <vm:BookRecordVM x:Key="vm" />
         <cv:BoolToVisConverter x:Key="boolToVis" />
@@ -26,44 +28,62 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="200" />
                 </Grid.ColumnDefinitions>
-                <ListView x:Name="booksListView"
-                      Height="340"
+                <StackPanel>
+                    <TextBlock Text="Books" 
+                               Background="#289cbd" 
+                               Foreground="#f0f8ff"
+                               TextAlignment="Center" />
+                    <ListView x:Name="booksListView"
+                      Height="160"
                       SelectedItem="{Binding SelectedBook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding Books}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <uc:BookControl DisplayBook="{Binding}" />
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <ListView Grid.Column="1"
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <uc:BookControl DisplayBook="{Binding}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Vertical">
+                    <TextBlock Text="Comments" 
+                               TextAlignment="Center"
+                               Background="#289cbd"
+                               Foreground="#f0f8ff"/>
+                    <ListView Grid.Column="1"
                           SelectedItem="{Binding SelectedComment }"
                           ItemsSource="{Binding Comments}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <uc:CommentControl DisplayComment="{Binding}" />
-                                <TextBox Text="{Binding CommentContent, Mode=TwoWay}"   
-                                         Visibility="{Binding Source={StaticResource vm}, Path=IsEditingComment, Converter={StaticResource boolToVis}}">
-                                    <b:Interaction.Triggers>
-                                        <b:EventTrigger EventName="LostFocus" >
-                                            <b:InvokeCommandAction Command="{Binding Source={StaticResource vm}, 
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <uc:CommentControl DisplayComment="{Binding}" />
+                                    <TextBox Text="{Binding CommentContent, Mode=TwoWay}"   
+                                         Visibility="{Binding Source={StaticResource vm}, Path=IsEditingComment, Converter={StaticResource boolToVis}}"
+                                             TextWrapping="Wrap"
+                                             MaxWidth="190">
+                                        <i:Interaction.Behaviors>
+                                            <behaviours:TextBoxEnterKeyUpdateBehaviour />
+                                        </i:Interaction.Behaviors>
+                                        <b:Interaction.Triggers>
+                                            <b:EventTrigger EventName="LostFocus" >
+                                                <b:InvokeCommandAction Command="{Binding Source={StaticResource vm}, 
                                                                     Path=HasEditedCommentCommand}"
                                                                    CommandParameter="{Binding}" />
-                                        </b:EventTrigger>
-                                    </b:Interaction.Triggers>
-                                </TextBox>
-                                <Grid.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="Rename"
+                                            </b:EventTrigger>
+                                        </b:Interaction.Triggers>
+                                    </TextBox>
+                                    <Grid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Edit Comment"
                                                   Command="{Binding Source={StaticResource vm}, Path=BeginCommentEditCommand}" />
-                                    </ContextMenu>
-                                </Grid.ContextMenu>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                    
-                </ListView>
+                                        </ContextMenu>
+                                    </Grid.ContextMenu>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                    </ListView>
+                </StackPanel>
+                
             </Grid>
         </Grid>
         <Grid Grid.Row="2" Background="#289cbd">

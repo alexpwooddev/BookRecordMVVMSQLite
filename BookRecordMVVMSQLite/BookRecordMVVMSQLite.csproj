@@ -105,6 +105,7 @@
     <Compile Include="ViewModel\Converters\BoolToVisConverter.cs" />
     <Compile Include="ViewModel\DatabaseHelper.cs" />
     <Compile Include="ViewModel\NewBookVM.cs" />
+    <Compile Include="View\Behaviours\TextBoxEnterKeyUpdateBehaviour.cs" />
     <Compile Include="View\BookRecordWindow.xaml.cs">
       <DependentUpon>BookRecordWindow.xaml</DependentUpon>
     </Compile>
