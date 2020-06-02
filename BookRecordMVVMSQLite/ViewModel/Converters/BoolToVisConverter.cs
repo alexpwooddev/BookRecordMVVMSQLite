@@ -13,9 +13,7 @@ namespace BookRecordMVVMSQLite.ViewModel.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool isVisible = (bool)value;
-
-            isVisible = true;
+            bool isVisible = (bool)value;            
 
             if (isVisible)
             {

@@ -110,15 +110,17 @@ namespace BookRecordMVVMSQLite.ViewModel
                 YearRead = InputYearRead
             };
 
+            DatabaseHelper.Insert(book);
+
             Comment newComment = new Comment()
             {
                 BookId = book.Id,
-                CommentContent = ""
+                CommentContent = "Right Click Here to Add Comments"
             };
             
 
             //Update the database Table with this book and comment
-            DatabaseHelper.Insert(book);
+            
             DatabaseHelper.Insert(newComment);
 
             InputTitle = string.Empty;

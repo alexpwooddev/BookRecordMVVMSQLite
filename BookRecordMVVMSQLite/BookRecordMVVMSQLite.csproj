@@ -98,6 +98,7 @@
     <Compile Include="Model\Comment.cs" />
     <Compile Include="ViewModel\BookRecordVM.cs" />
     <Compile Include="ViewModel\Commands\AddBookCommand.cs" />
+    <Compile Include="ViewModel\Commands\BeginCommentEditCommand.cs" />
     <Compile Include="ViewModel\Commands\HasEditedCommentCommand.cs" />
     <Compile Include="ViewModel\Commands\OpenAddWindowCommand.cs" />
     <Compile Include="ViewModel\Commands\RemoveCommand.cs" />

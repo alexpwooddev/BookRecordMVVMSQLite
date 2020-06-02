@@ -65,9 +65,24 @@ namespace BookRecordMVVMSQLite.ViewModel
                 if (selectedBook != null)
                 {
                     OnPropertyChanged("SelectedBook");
+                    ReadComments();
                 }
             }
         }
+
+        private Comment selectedComment;
+
+        public Comment SelectedComment
+        {
+            get { return selectedComment; }
+            set 
+            { 
+                selectedComment = value;
+                //is this the key to losing focus and the trigger?
+                //SelectedCommentChanged(this, new EventArgs());
+            }
+        }
+
 
 
 
@@ -78,20 +93,25 @@ namespace BookRecordMVVMSQLite.ViewModel
         public OpenAddWindowCommand OpenAddWindowCommand { get; set; }
 
         public RemoveCommand RemoveCommand { get; set; }
+        public BeginCommentEditCommand BeginCommentEditCommand { get; set; }
 
         public HasEditedCommentCommand HasEditedCommentCommand { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public event EventHandler SelectedCommentChanged;
 
 
 
         public BookRecordVM()
         {
-            IsEditingComment = true;
             
             Books = new ObservableCollection<Book>();
             Comments = new ObservableCollection<Comment>();
 
             OpenAddWindowCommand = new OpenAddWindowCommand(this);
             RemoveCommand = new RemoveCommand(this);
+            BeginCommentEditCommand = new BeginCommentEditCommand(this);
             HasEditedCommentCommand = new HasEditedCommentCommand(this);
 
             ReadBooks();
@@ -154,6 +174,7 @@ namespace BookRecordMVVMSQLite.ViewModel
             newBookWindow.Closed += (s, eventarg) =>
             {
                 ReadBooks();
+                ReadComments();
             };
             newBookWindow.ShowDialog();
         }
@@ -163,31 +184,45 @@ namespace BookRecordMVVMSQLite.ViewModel
         {
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(DatabaseHelper.dbFile))
             {
-                conn.CreateTable<Comment>();
+                //conn.CreateTable<Comment>();
 
-                var comments = conn.Table<Comment>().ToList();
-
-                //clear everytime to avoid duplicates from previous calls
-                Comments.Clear();
-
-                foreach (var comment in comments)
+                //filter for selectedBook
+                if (selectedBook != null)
                 {
-                    Comments.Add(comment);
+                    var comments = conn.Table<Comment>().Where(c => c.BookId == SelectedBook.Id).ToList();
+                    
+                    //clear everytime to avoid duplicates from previous calls
+                    Comments.Clear();
+
+                    foreach (var comment in comments)
+                    {
+                        Comments.Add(comment);
+                    }
                 }
+                
             }
         }
+
+
+        public void StartCommentEditing()
+        {
+            IsEditingComment = true;
+        }
+
 
         public void HasCommented(Comment comment)
         {
             if (comment != null)
             {
                 DatabaseHelper.Update(comment);
+                IsEditingComment = false;
+                ReadComments();
             }
         }
 
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        
 
         private void OnPropertyChanged(string propertyName)
         {
