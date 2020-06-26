@@ -1,6 +1,6 @@
 # BookRecordMVVMSQLite
 Description:
-Practice of MVVM pattern with SQLite database
+Book record desktop app with MVVM pattern with SQLite database
 
 Usage:
 Can add and remove books from the book record
